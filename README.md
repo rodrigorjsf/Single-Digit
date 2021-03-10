@@ -5,7 +5,7 @@ Projeto de API criada para cadastramento de usuário e identificação do dígit
 Especificação da API:(http://localhost:[port]/api/swagger-ui.html)
 
 ```
-            :: FLEXPAG -  Arquivo Retorno Utilities ::
+            :: SINGLE DIGIT APPLICATION ::
 
 ┌───────────────┐       ┌───┬────────────┐       ┌──────────────┐
 │     API       │       │ R │            │       │              │
