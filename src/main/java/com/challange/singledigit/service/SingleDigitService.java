@@ -19,7 +19,7 @@ public class SingleDigitService {
     public Integer getSingleDigit(String digit, int repetitions) {
         if (isNumeric(digit)) {
             var number = repetitions <= 0 ? digit : digit.repeat(repetitions);
-            var cachedResult = cacheService.getCache().get(number);
+            var cachedResult = cacheService.getCache().getOrDefault(number, null);
 
             if (Objects.nonNull(cachedResult))
                 return cachedResult;
@@ -32,6 +32,9 @@ public class SingleDigitService {
     }
 
     private Integer calculateSingleDigit(String number) {
-        return Integer.parseInt(number) % 9;
+        while (number.length() > 1) {
+            number = Integer.toString(number.chars().map(Character::getNumericValue).sum());
+        }
+        return Integer.parseInt(number);
     }
 }
