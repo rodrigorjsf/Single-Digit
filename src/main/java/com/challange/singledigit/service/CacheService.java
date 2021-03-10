@@ -15,4 +15,13 @@ public class CacheService {
             return size() > 10;
         }
     };
+
+    public void put(String inputNumber, Integer result) {
+        cache.put(inputNumber, result);
+    }
+
+    public Integer get(String inputNumber) {
+        return cache.getOrDefault(inputNumber, null);
+    }
+
 }
