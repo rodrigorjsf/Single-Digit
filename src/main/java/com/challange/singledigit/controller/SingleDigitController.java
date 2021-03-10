@@ -1,4 +1,4 @@
-package com.challange.singledigit.Controller;
+package com.challange.singledigit.controller;
 
 import com.challange.singledigit.service.SingleDigitService;
 import io.swagger.annotations.ApiOperation;
