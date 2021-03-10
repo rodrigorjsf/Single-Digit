@@ -2,7 +2,7 @@
 
 Projeto de API criada para cadastramento de usuário e identificação do dígito único a partir da soma dos dígitos de um número.
 
-Especificação da API:(http://localhost:[port]/api/swagger-ui.html)
+Especificação da API:(http://localhost:8083/api/swagger-ui.html)
 
 ```
             :: SINGLE DIGIT APPLICATION ::
@@ -31,7 +31,7 @@ Este projeto usa as seguintes tecnologias:
 
 **Importação do Projeto (Git)**
 
-Após abrir o Eclipse, importar projeto do Git:
+Após abrir o IntelliJ, importar projeto do Git:
 
 1. _File_ -> _New..._ -> _Project from version control_ -> _URL_
 2. URL: `https://gitlab.com/rodrigorjsf/Single-Digit.git` -> _Next_
