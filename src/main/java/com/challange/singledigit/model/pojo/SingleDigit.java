@@ -5,13 +5,14 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import java.util.Objects;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 @Table(schema = "public",name = "single_digit")
 public class SingleDigit extends BaseEntity {
 
