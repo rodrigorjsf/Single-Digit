@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import static com.challange.singledigit.exception.ApplicationExceptionType.*;
+
 @Service
 @RequiredArgsConstructor(onConstructor_ = {@Autowired})
 public class UserService {
@@ -27,7 +29,7 @@ public class UserService {
     public User create(UserRequest request) {
         var userOptional = repository.findByEmailAndRemovedAtIsNull(request.getEmail());
         if (userOptional.isPresent())
-            throw new ApplicationException(ApplicationExceptionType.EMAIL_ALREADY_USED);
+            throw new ApplicationException(EMAIL_ALREADY_USED);
         var newUser = request.toUser();
         return repository.save(newUser);
     }
@@ -35,7 +37,7 @@ public class UserService {
     public User find(UUID uuid) {
         var userOptional = repository.findByUidAndRemovedAtIsNull(uuid);
         if (userOptional.isEmpty())
-            throw new ApplicationException(ApplicationExceptionType.ENTITY_NOT_FOUND);
+            throw new ApplicationException(ENTITY_NOT_FOUND);
         var singleDigitsList = singleDigitRepository.findAllByUser(userOptional.get());
         userOptional.get().setSingleDigitList(singleDigitsList);
         return userOptional.get();
@@ -54,7 +56,7 @@ public class UserService {
     public User delete(UUID uuid) {
         var userOptional = repository.findByUidAndRemovedAtIsNull(uuid);
         if (userOptional.isEmpty())
-            throw new ApplicationException(ApplicationExceptionType.ENTITY_NOT_FOUND);
+            throw new ApplicationException(ENTITY_NOT_FOUND);
         userOptional.get().setRemovedAt(LocalDateTime.now());
         return repository.save(userOptional.get());
     }
