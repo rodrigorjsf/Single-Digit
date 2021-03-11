@@ -1,9 +1,8 @@
 package com.challange.singledigit.service;
 
 import com.challange.singledigit.exception.ApplicationException;
-import com.challange.singledigit.exception.ApplicationExceptionType;
-import com.challange.singledigit.model.User;
-import com.challange.singledigit.model.UserRequest;
+import com.challange.singledigit.model.pojo.User;
+import com.challange.singledigit.model.dto.UserRequest;
 import com.challange.singledigit.repository.SingleDigitRepository;
 import com.challange.singledigit.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

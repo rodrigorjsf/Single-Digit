@@ -1,10 +1,10 @@
-package com.challange.singledigit.model;
+package com.challange.singledigit.model.dto;
 
+import com.challange.singledigit.model.pojo.SingleDigit;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.UUID;

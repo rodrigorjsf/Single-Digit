@@ -1,7 +1,7 @@
 package com.challange.singledigit.controller;
 
-import com.challange.singledigit.model.UserRequest;
-import com.challange.singledigit.model.UserResponse;
+import com.challange.singledigit.model.dto.UserRequest;
+import com.challange.singledigit.model.dto.UserResponse;
 import com.challange.singledigit.service.UserService;
 import com.challange.singledigit.util.UUIDUtils;
 import io.swagger.annotations.ApiOperation;
@@ -10,7 +10,6 @@ import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

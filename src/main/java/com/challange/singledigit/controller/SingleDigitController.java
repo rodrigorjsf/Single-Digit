@@ -1,6 +1,6 @@
 package com.challange.singledigit.controller;
 
-import com.challange.singledigit.model.SingleDigitResponse;
+import com.challange.singledigit.model.dto.SingleDigitResponse;
 import com.challange.singledigit.service.SingleDigitService;
 import com.challange.singledigit.util.UUIDUtils;
 import io.swagger.annotations.ApiOperation;

@@ -1,6 +1,6 @@
 package com.challange.singledigit.repository;
 
-import com.challange.singledigit.model.User;
+import com.challange.singledigit.model.pojo.User;
 import com.challange.singledigit.repository.base.BaseCrudRepository;
 
 import java.util.Optional;

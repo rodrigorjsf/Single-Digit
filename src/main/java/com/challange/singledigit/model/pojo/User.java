@@ -1,4 +1,4 @@
-package com.challange.singledigit.model;
+package com.challange.singledigit.model.pojo;
 
 import com.challange.singledigit.model.base.BaseEntity;
 import lombok.*;

@@ -1,12 +1,13 @@
-package com.challange.singledigit.model;
+package com.challange.singledigit.model.dto;
 
+import com.challange.singledigit.model.pojo.SingleDigit;
+import com.challange.singledigit.model.pojo.User;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.UUID;
 

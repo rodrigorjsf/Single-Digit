@@ -1,5 +1,6 @@
-package com.challange.singledigit.model;
+package com.challange.singledigit.model.dto;
 
+import com.challange.singledigit.model.pojo.User;
 import lombok.Getter;
 import lombok.Setter;
 
