@@ -2,8 +2,8 @@ package com.challange.singledigit.service;
 
 import com.challange.singledigit.exception.ApplicationException;
 import com.challange.singledigit.exception.ApplicationExceptionType;
+import com.challange.singledigit.model.User;
 import com.challange.singledigit.model.UserRequest;
-import com.challange.singledigit.model.UserResponse;
 import com.challange.singledigit.repository.SingleDigitRepository;
 import com.challange.singledigit.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,37 +24,38 @@ public class UserService {
     private final UserRepository repository;
     private final SingleDigitRepository singleDigitRepository;
 
-    public UserResponse create(UserRequest request) {
+    public User create(UserRequest request) {
         var userOptional = repository.findByEmailAndRemovedAtIsNull(request.getEmail());
         if (userOptional.isPresent())
             throw new ApplicationException(ApplicationExceptionType.EMAIL_ALREADY_USED);
         var newUser = request.toUser();
-        newUser = repository.save(newUser);
-        return new UserResponse(newUser);
+        return repository.save(newUser);
     }
 
-    public UserResponse find(UUID uuid) {
+    public User find(UUID uuid) {
         var userOptional = repository.findByUidAndRemovedAtIsNull(uuid);
         if (userOptional.isEmpty())
             throw new ApplicationException(ApplicationExceptionType.ENTITY_NOT_FOUND);
         var singleDigitsList = singleDigitRepository.findAllByUser(userOptional.get());
-        return new UserResponse(userOptional.get(), singleDigitsList);
+        userOptional.get().setSingleDigitList(singleDigitsList);
+        return userOptional.get();
     }
 
-    public List<UserResponse> findAll() {
+    public List<User> findAll() {
         var userList = repository.findAllByRemovedAtIsNull();
         if (CollectionUtils.isEmpty(userList))
             return Collections.emptyList();
-        return userList.stream().map(user -> {
+        return userList.stream().peek(user -> {
             var singleDigitsList = singleDigitRepository.findAllByUser(user);
-            return new UserResponse(user, singleDigitsList);
+            user.setSingleDigitList(singleDigitsList);
         }).collect(Collectors.toList());
     }
 
-    public void delete(UUID uuid) {
+    public User delete(UUID uuid) {
         var userOptional = repository.findByUidAndRemovedAtIsNull(uuid);
         if (userOptional.isEmpty())
             throw new ApplicationException(ApplicationExceptionType.ENTITY_NOT_FOUND);
-        repository.deleteBySettingRemovedAt(LocalDateTime.now(), userOptional.get().getUid());
+        userOptional.get().setRemovedAt(LocalDateTime.now());
+        return repository.save(userOptional.get());
     }
 }

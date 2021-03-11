@@ -27,14 +27,14 @@ public class SingleDigitServiceTest {
     @Test
     public void shouldThrowException_whenStringHasANonDigitChar() {
         assertThrows(ApplicationException.class, () ->
-                singleDigitService.getSingleDigit("sasa7s4as", 1));
+                singleDigitService.getSingleDigit("sasa7s4as", 1, null));
     }
 
     @Test
     public void shouldCheckCacheServiceBeforeCalculateSingleDigit() {
         when(cacheService.get(any())).thenReturn(null);
 
-        singleDigitService.getSingleDigit("9875", 4);
+        singleDigitService.getSingleDigit("9875", 4, null);
 
         verify(cacheService).get(eq("9875987598759875"));
     }
@@ -43,7 +43,7 @@ public class SingleDigitServiceTest {
     public void shouldStoreCalculationOnCacheService_whenCalculatingSingleDigit() {
         when(cacheService.get(any())).thenReturn(null);
 
-        singleDigitService.getSingleDigit("9875", 1);
+        singleDigitService.getSingleDigit("9875", 1, null);
 
         verify(cacheService).put(eq("9875"), eq(2));
     }
@@ -51,25 +51,25 @@ public class SingleDigitServiceTest {
     @Test
     public void shouldReturn2_whenInputsAreNumber9875AndRepeatTimes1() {
         setupCacheToReturnNull();
-        assertEquals(2, singleDigitService.getSingleDigit("9875", 1));
+        assertEquals(2, singleDigitService.getSingleDigit("9875", 1, null));
     }
 
     @Test
     public void shouldReturn8_whenInputsAreNumber9875AndRepeatTimes4() {
         setupCacheToReturnNull();
-        assertEquals(8, singleDigitService.getSingleDigit("9875", 4));
+        assertEquals(8, singleDigitService.getSingleDigit("9875", 4, null));
     }
 
     @Test
     public void shouldReturnSingleDigitWithoutRepeatingInputNumber_whenInputRepeatTimeIsZero() {
         setupCacheToReturnNull();
-        assertEquals(2, singleDigitService.getSingleDigit("9875", 0));
+        assertEquals(2, singleDigitService.getSingleDigit("9875", 0, null));
     }
 
     @Test
     public void shouldReturnSingleDigitWithoutRepeatingInputNumber_whenInputRepeatTimeIsLessThanZero() {
         setupCacheToReturnNull();
-        assertEquals(2, singleDigitService.getSingleDigit("9875", -1));
+        assertEquals(2, singleDigitService.getSingleDigit("9875", -1, null));
     }
 
     private void setupCacheToReturnNull() {

@@ -6,6 +6,8 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Getter
@@ -13,10 +15,13 @@ import javax.persistence.Entity;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(schema = "public", name = "user")
 public class User extends BaseEntity {
 
     @Column(nullable = false)
     private String name;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String email;
+
+    private transient List<SingleDigit> singleDigitList;
 }
