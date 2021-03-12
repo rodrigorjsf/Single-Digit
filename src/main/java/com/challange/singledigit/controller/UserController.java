@@ -1,7 +1,9 @@
 package com.challange.singledigit.controller;
 
+import com.challange.singledigit.model.dto.KeyRequest;
 import com.challange.singledigit.model.dto.UserRequest;
 import com.challange.singledigit.model.dto.UserResponse;
+import com.challange.singledigit.service.CryptoService;
 import com.challange.singledigit.service.UserService;
 import com.challange.singledigit.util.UUIDUtils;
 import io.swagger.annotations.ApiOperation;
@@ -21,7 +23,7 @@ import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import static org.springframework.http.MediaType.*;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping("user")
@@ -29,6 +31,7 @@ import static org.springframework.http.MediaType.*;
 public class UserController {
 
     private final UserService service;
+    private final CryptoService cryptoService;
 
     @ApiOperation(value = "Create a new user")
     @ApiResponses(value = {
@@ -40,6 +43,19 @@ public class UserController {
     public ResponseEntity<UserResponse> create(@NotNull @Valid @RequestBody UserRequest request) {
         var user = service.create(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(new UserResponse(user));
+    }
+
+    @ApiOperation(value = "Create a new user")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Returns a new created user."),
+            @ApiResponse(code = 400, message = "Missing/Wrong parameters"),
+    })
+    @ResponseStatus(HttpStatus.OK)
+    @PutMapping(path = "/{uid}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<UserResponse> update(@PathVariable @Pattern(regexp = UUIDUtils.UUID_REGEXP, message = "Invalid uid") UUID uid,
+                                               @NotNull @Valid @RequestBody UserRequest request) {
+        var user = service.updateOrCreate(uid, request);
+        return ResponseEntity.status(HttpStatus.OK).body(new UserResponse(user));
     }
 
     @ApiOperation(value = "Find all registered users")
@@ -58,7 +74,7 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
-    @ApiOperation(value = "Find a specific user by uuid")
+    @ApiOperation(value = "Find a specific user by uuid and their single digits.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Returns a user."),
             @ApiResponse(code = 400, message = "Invalid UUID string."),
@@ -88,5 +104,35 @@ public class UserController {
         if (Objects.nonNull(user.getRemovedAt()))
             return ResponseEntity.ok().build();
         return ResponseEntity.noContent().build();
+    }
+
+    @ApiOperation(value = "Encrypts a user's information.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Returns a user with their encrypted information."),
+            @ApiResponse(code = 400, message = "Invalid parameters."),
+            @ApiResponse(code = 500, message = "Some internal error."),
+    })
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping("/users/{uid}/encrypt")
+    public ResponseEntity<UserResponse> encrypt(@PathVariable
+                                                @Pattern(regexp = UUIDUtils.UUID_REGEXP, message = "Invalid uid") UUID uid,
+                                                @NotNull @Valid @RequestBody KeyRequest key) {
+        var user = cryptoService.encrypt(uid, key.getBase64EncodedKey());
+        return ResponseEntity.ok(new UserResponse(user));
+    }
+
+    @ApiOperation(value = "Decrypts a user's information.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Returns a user with their decrypted information."),
+            @ApiResponse(code = 400, message = "Invalid parameters."),
+            @ApiResponse(code = 500, message = "Some internal error."),
+    })
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping("/users/{uid}/decrypt")
+    public ResponseEntity<UserResponse> decrypt(@PathVariable
+                                                @Pattern(regexp = UUIDUtils.UUID_REGEXP, message = "Invalid uid") UUID uid,
+                                                @NotNull @Valid @RequestBody KeyRequest key) {
+        var user = cryptoService.decrypt(uid, key.getBase64EncodedKey());
+        return ResponseEntity.ok(new UserResponse(user));
     }
 }

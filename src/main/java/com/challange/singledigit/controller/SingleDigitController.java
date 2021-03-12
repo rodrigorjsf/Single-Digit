@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -30,8 +31,8 @@ public class SingleDigitController {
     })
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<SingleDigitResponse> calculate(@NotNull @RequestParam("digit") String digit,
-                                                         @RequestParam("repetitions") Integer repetitions,
+    public ResponseEntity<SingleDigitResponse> calculate(@NotNull @Valid @RequestParam("digit") String digit,
+                                                         @Valid @RequestParam("repetitions") Integer repetitions,
                                                          @RequestParam(value = "userUid", required = false)
                                                          @Pattern(regexp = UUIDUtils.UUID_REGEXP, message = "Invalid uid") String userUid) {
         var singleDigit = singleDigitService.getSingleDigit(digit, repetitions, userUid);

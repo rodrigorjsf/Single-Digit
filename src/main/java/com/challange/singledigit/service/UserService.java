@@ -1,7 +1,7 @@
 package com.challange.singledigit.service;
 
 import com.challange.singledigit.exception.ApplicationException;
-import com.challange.singledigit.model.pojo.User;
+import com.challange.singledigit.model.User;
 import com.challange.singledigit.model.dto.UserRequest;
 import com.challange.singledigit.repository.SingleDigitRepository;
 import com.challange.singledigit.repository.UserRepository;
@@ -31,6 +31,22 @@ public class UserService {
             throw new ApplicationException(EMAIL_ALREADY_USED);
         var newUser = request.toUser();
         return repository.save(newUser);
+    }
+
+    public User updateOrCreate(UUID uid, UserRequest request) {
+        var userOptional = repository.findByUidAndRemovedAtIsNull(uid);
+        if (userOptional.isEmpty()){
+            var user = request.toUser();
+            user.setUid(uid);
+            return update(user);
+        }
+        userOptional.get().setEmail(request.getEmail());
+        userOptional.get().setName(request.getName());
+        return update(userOptional.get());
+    }
+
+    public User update (User user) {
+        return repository.save(user);
     }
 
     public User find(UUID uuid) {

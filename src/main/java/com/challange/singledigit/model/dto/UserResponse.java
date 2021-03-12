@@ -1,6 +1,6 @@
 package com.challange.singledigit.model.dto;
 
-import com.challange.singledigit.model.pojo.User;
+import com.challange.singledigit.model.User;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;

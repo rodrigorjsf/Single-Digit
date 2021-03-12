@@ -1,11 +1,10 @@
-package com.challange.singledigit.model.pojo;
+package com.challange.singledigit.model;
 
 import com.challange.singledigit.model.base.BaseEntity;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity

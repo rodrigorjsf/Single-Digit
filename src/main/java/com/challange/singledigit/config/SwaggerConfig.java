@@ -15,24 +15,25 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 
+
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
-            .select()
-            .apis(RequestHandlerSelectors.basePackage("com.challange.singledigit.controller"))
-            .paths(PathSelectors.any())
-            .build()
-            .useDefaultResponseMessages(false)
-            .apiInfo(apiInfo());
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.challange.singledigit.controller"))
+                .paths(PathSelectors.any())
+                .build()
+                .useDefaultResponseMessages(false)
+                .apiInfo(apiInfo());
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-            .title("Single digit generator project")
-            .description("API created for user registration and identification of the Sum of digits until single digit.")
-            .version("1.0.0")
-            .contact(new Contact("Rodrigo Jorge de Santana França",
-                    "https://github.com/rodrigorjsf", "rodrigo_rjsf@hotmail.com"))
-            .build();
+                .title("Single digit generator project")
+                .description("API created for user registration and identification of the Sum of digits until single digit.")
+                .version("1.0.0")
+                .contact(new Contact("Rodrigo Jorge de Santana França",
+                        "https://github.com/rodrigorjsf", "rodrigo_rjsf@hotmail.com"))
+                .build();
     }
 }

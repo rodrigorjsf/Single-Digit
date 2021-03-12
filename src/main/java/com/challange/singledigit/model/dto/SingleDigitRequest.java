@@ -1,6 +1,6 @@
 package com.challange.singledigit.model.dto;
 
-import com.challange.singledigit.model.pojo.SingleDigit;
+import com.challange.singledigit.model.SingleDigit;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

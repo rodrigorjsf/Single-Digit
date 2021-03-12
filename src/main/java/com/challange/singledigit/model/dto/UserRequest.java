@@ -1,6 +1,7 @@
 package com.challange.singledigit.model.dto;
 
-import com.challange.singledigit.model.pojo.User;
+import com.challange.singledigit.model.User;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +11,7 @@ import java.io.Serializable;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class UserRequest implements Serializable {
 
     protected static final long serialVersionUID = 1L;
@@ -18,6 +20,7 @@ public class UserRequest implements Serializable {
     private String name;
 
     @Email
+    @NotEmpty
     private String email;
 
     public User toUser() {

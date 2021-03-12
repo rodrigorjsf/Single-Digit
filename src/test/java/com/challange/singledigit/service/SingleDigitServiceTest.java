@@ -1,8 +1,8 @@
 package com.challange.singledigit.service;
 
 import com.challange.singledigit.exception.ApplicationException;
-import com.challange.singledigit.model.pojo.SingleDigit;
-import com.challange.singledigit.model.pojo.User;
+import com.challange.singledigit.model.SingleDigit;
+import com.challange.singledigit.model.User;
 import com.challange.singledigit.repository.SingleDigitRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

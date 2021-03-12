@@ -1,7 +1,7 @@
 package com.challange.singledigit.model.dto;
 
-import com.challange.singledigit.model.pojo.SingleDigit;
-import com.challange.singledigit.model.pojo.User;
+import com.challange.singledigit.model.SingleDigit;
+import com.challange.singledigit.model.User;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
