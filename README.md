@@ -2,9 +2,11 @@
 
 Projeto de API criada para cadastramento de usuário e identificação do dígito único a partir da soma dos dígitos de um número.
 
-Especificação da API:(https://single-digit-project.herokuapp.com/api/v1/swagger-ui.html#/)
+**Especificação da API:** [Swagger DOC](https://single-digit-project.herokuapp.com/api/v1/swagger-ui.html#/)
 
 É Possível gerar as chaves RSA através do link a seguir: [devglan](https://www.devglan.com/online-tools/rsa-encryption-decryption)
+
+_Obs:_ A chave deve ter **2048 bit**
 
 ```
             :: SINGLE DIGIT APPLICATION ::
