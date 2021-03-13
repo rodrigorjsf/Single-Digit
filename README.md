@@ -121,7 +121,7 @@ src
 ```
 
 ## 3 - Testes
-###Testes Unitários
+### Testes Unitários
 Foram criados testes unitários para as classes de negócio (*Service.java) dos serviços, a fim de garantir a corretude acerca da lógica de negócio envolvendo estas classes. Estas classes de testes foram criadas usando JUnit e Mockito (para 'mockar' as classes dependentes). Para rodar todos os testes unitários do projeto usando o Maven, executar o seguinte comando:
 ```
 $ mvn clean test
@@ -130,7 +130,7 @@ $ mvn clean test
 O deploy da aplicação foi feito no servidor do [Heroku](https://www.heroku.com/) onde foi necessário
 realizar o download do [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) para subir a aplicação no servidor.
 
-###4.1 - Deploy da Aplicação
+### 4.1 - Deploy da Aplicação
 Após instalar o Heroku CLI é necessário realizar os seguintes passos:
 
 Abrir o CMD e ir ao diretório do projeto
@@ -152,7 +152,7 @@ $ git add .
 $ git commit -am "your commit description"
 $ git push heroku main
 ````
-### 4.1- Gerar a Build do Aplicação
+### 4.2- Gerar a Build do Aplicação
 ````
 $ mvn clean package
 ````
