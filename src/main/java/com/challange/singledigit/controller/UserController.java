@@ -113,7 +113,7 @@ public class UserController {
             @ApiResponse(code = 500, message = "Some internal error."),
     })
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/users/{uid}/encrypt")
+    @PostMapping("/{uid}/encrypt")
     public ResponseEntity<UserResponse> encrypt(@PathVariable
                                                 @Pattern(regexp = UUIDUtils.UUID_REGEXP, message = "Invalid uid") UUID uid,
                                                 @NotNull @Valid @RequestBody KeyRequest key) {
@@ -128,7 +128,7 @@ public class UserController {
             @ApiResponse(code = 500, message = "Some internal error."),
     })
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/users/{uid}/decrypt")
+    @PostMapping("/{uid}/decrypt")
     public ResponseEntity<UserResponse> decrypt(@PathVariable
                                                 @Pattern(regexp = UUIDUtils.UUID_REGEXP, message = "Invalid uid") UUID uid,
                                                 @NotNull @Valid @RequestBody KeyRequest key) {

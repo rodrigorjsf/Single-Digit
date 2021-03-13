@@ -1,0 +1,343 @@
+{
+	"info": {
+		"_postman_id": "7e38ca89-d554-49cf-84c4-2530177c8719",
+		"name": "ONE DIGIT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "SINGLE DIGIT",
+			"item": [
+				{
+					"name": "CALCULATE SINGLE DIGIT",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://single-digit-project.herokuapp.com/api/v1/single-digit?digit={{$randomInt}}&repetitions={{$randomInt}}",
+							"protocol": "https",
+							"host": [
+								"single-digit-project",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"single-digit"
+							],
+							"query": [
+								{
+									"key": "digit",
+									"value": "{{$randomInt}}"
+								},
+								{
+									"key": "repetitions",
+									"value": "{{$randomInt}}"
+								},
+								{
+									"key": "userUid",
+									"value": "{uid}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "USER",
+			"item": [
+				{
+					"name": "FIND ALL USERS",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://single-digit-project.herokuapp.com/api/v1/user",
+							"protocol": "https",
+							"host": [
+								"single-digit-project",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE USER",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Rodrik\",\n\t\"email\": \"rodrik@email.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://single-digit-project.herokuapp.com/api/v1/user",
+							"protocol": "https",
+							"host": [
+								"single-digit-project",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FIND SPECIFIC USER",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://single-digit-project.herokuapp.com/api/v1/user/{uid}",
+							"protocol": "https",
+							"host": [
+								"single-digit-project",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"{uid}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE USER",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://single-digit-project.herokuapp.com/api/v1/user/{uid}",
+							"protocol": "https",
+							"host": [
+								"single-digit-project",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"{uid}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE USER",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Rodrik\",\n\t\"email\": \"rodrik@email.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://single-digit-project.herokuapp.com/api/v1/user/{{$randomUUID}}",
+							"protocol": "https",
+							"host": [
+								"single-digit-project",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"{{$randomUUID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ENCRYPT USER INFORMATIONS",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"base64EncodedKey\": \"base64EncodedKey\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://single-digit-project.herokuapp.com/api/v1/user/{{userUid}}/encrypt",
+							"protocol": "https",
+							"host": [
+								"single-digit-project",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"{{userUid}}",
+								"encrypt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DECRYPT USER INFORMATIONS",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"base64EncodedKey\": \"base64EncodedKey\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://single-digit-project.herokuapp.com/api/v1/user/{{userUid}}/decrypt",
+							"protocol": "https",
+							"host": [
+								"single-digit-project",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"{{userUid}}",
+								"decrypt"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "userUid",
+			"value": "uid"
+		},
+		{
+			"key": "base64EncodedKey",
+			"value": "a"
+		}
+	]
+}
