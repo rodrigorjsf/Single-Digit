@@ -90,10 +90,10 @@ O projeto foi desenvolvido usando a ferramenta [SpringBoot](https://thorntail.io
 $ mvn install
 ```
 
-Para executar aplicação juntamente com o servidor de aplicação Wildfly, basta executar o seguinte comando:
+Para executar aplicação basta executar o seguinte comando:
 
 ```sh
-$ java -jar nome-da-aplicacao.jar
+$ mvn spring-boot:run
 ```
 
 A organização e significado de cada um dos pacotes do projeto segue abaixo:
