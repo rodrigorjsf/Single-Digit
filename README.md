@@ -168,7 +168,7 @@ public long singleDigit(long number) {
 ````
 A segunda estratégia é usada para números que tem valor maior que a variável Long.MAX_VALUE utilizando um algoritmo de complexidade O(n) com Stream API para realizar o cálculo.
 ````
-public long digitalSum(String number) {
+public Integer digitalSum(String number) {
      while (number.length() > 1) {
             number = Integer.toString(
                                 number.chars()
