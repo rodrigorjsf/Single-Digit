@@ -111,5 +111,7 @@ src
 │   │   ├── util                                     -> classes utilitárias
 │   ├── resources
 │   │   └── application                              -> arquivo de propriedades para ambiente de homologacao do projeto
-└── test
+├── test
+│   ├── java/com/challange/singledigit
+│   │   ├── service                                  -> classes de teste da camada de negócio (xxxxService.java)
 ```
