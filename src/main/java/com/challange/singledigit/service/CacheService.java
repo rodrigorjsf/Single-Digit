@@ -11,6 +11,7 @@ import java.util.Map;
 public class CacheService {
 
     Map<String, Integer> cache = new LinkedHashMap<>(10, .100F, true) {
+        @Override
         public boolean removeEldestEntry(Map.Entry eldest) {
             return size() > 10;
         }

@@ -62,10 +62,11 @@ public class UserService {
         var userList = repository.findAllByRemovedAtIsNull();
         if (CollectionUtils.isEmpty(userList))
             return Collections.emptyList();
-        return userList.stream().peek(user -> {
+        userList.forEach(user -> {
             var singleDigitsList = singleDigitRepository.findAllByUser(user);
             user.setSingleDigitList(singleDigitsList);
-        }).collect(Collectors.toList());
+        });
+        return userList;
     }
 
     public User delete(UUID uuid) {

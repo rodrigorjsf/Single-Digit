@@ -20,7 +20,7 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class SingleDigitServiceTest {
+class SingleDigitServiceTest {
 
     @Mock
     private CacheService cacheService;
@@ -35,22 +35,22 @@ public class SingleDigitServiceTest {
     private SingleDigitService singleDigitService;
 
     @Test
-    public void shouldThrowException_whenStringHasANonDigitChar() {
+    void shouldThrowException_whenStringHasANonDigitChar() {
         assertThrows(ApplicationException.class, () ->
                 singleDigitService.getSingleDigit("sasa7s4as", 1, null));
     }
 
     @Test
-    public void shouldCheckCacheServiceBeforeCalculateSingleDigit() {
+    void shouldCheckCacheServiceBeforeCalculateSingleDigit() {
         when(cacheService.get(any())).thenReturn(null);
 
         singleDigitService.getSingleDigit("9875", 4, null);
 
-        verify(cacheService).get(eq("9875987598759875"));
+        verify(cacheService).get("9875987598759875");
     }
 
     @Test
-    public void shouldStoreCalculationOnCacheService_whenCalculatingSingleDigit() {
+    void shouldStoreCalculationOnCacheService_whenCalculatingSingleDigit() {
         when(cacheService.get(any())).thenReturn(null);
 
         singleDigitService.getSingleDigit("9875", 1, null);
@@ -59,25 +59,25 @@ public class SingleDigitServiceTest {
     }
 
     @Test
-    public void shouldReturn2_whenInputsAreNumber9875AndRepeatTimes1() {
+    void shouldReturn2_whenInputsAreNumber9875AndRepeatTimes1() {
         setupCacheToReturnNull();
         assertEquals(2, singleDigitService.getSingleDigit("9875", 1, null).getResult());
     }
 
     @Test
-    public void shouldReturn8_whenInputsAreNumber9875AndRepeatTimes4() {
+    void shouldReturn8_whenInputsAreNumber9875AndRepeatTimes4() {
         setupCacheToReturnNull();
         assertEquals(8, singleDigitService.getSingleDigit("9875", 4, null).getResult());
     }
 
     @Test
-    public void shouldReturnSingleDigitWithoutRepeatingInputNumber_whenInputRepeatTimeIsZero() {
+    void shouldReturnSingleDigitWithoutRepeatingInputNumber_whenInputRepeatTimeIsZero() {
         setupCacheToReturnNull();
         assertEquals(2, singleDigitService.getSingleDigit("9875", 0, null).getResult());
     }
 
     @Test
-    public void shouldReturnSingleDigitWithoutRepeatingInputNumber_whenInputRepeatTimeIsLessThanZero() {
+    void shouldReturnSingleDigitWithoutRepeatingInputNumber_whenInputRepeatTimeIsLessThanZero() {
         setupCacheToReturnNull();
         assertEquals(2, singleDigitService.getSingleDigit("9875", -1, null).getResult());
     }
@@ -88,13 +88,13 @@ public class SingleDigitServiceTest {
     }
 
     @Test
-    public void shouldThrowApplicationException_whenDigitIsntNumeric() {
+    void shouldThrowApplicationException_whenDigitIsntNumeric() {
         assertThrows(ApplicationException.class, () ->
                 singleDigitService.getSingleDigit("2daew", 1, null));
     }
 
     @Test
-    public void shouldSaveSingleDigitToAUser_whenUserUUIDIsNotNull() {
+    void shouldSaveSingleDigitToAUser_whenUserUUIDIsNotNull() {
         when(cacheService.get(any())).thenReturn(null);
         var userMock = new User("rodrick", "rodrik@email.com", Collections.emptyList());
         when(userService.find(any())).thenReturn(userMock);
@@ -118,7 +118,7 @@ public class SingleDigitServiceTest {
     }
 
     @Test
-    public void shouldFetchUserByUUID_whenUserUUIDIsNotNull() {
+    void shouldFetchUserByUUID_whenUserUUIDIsNotNull() {
         when(userService.find(any())).thenReturn(mock(User.class));
 
         var uid = UUID.randomUUID().toString();

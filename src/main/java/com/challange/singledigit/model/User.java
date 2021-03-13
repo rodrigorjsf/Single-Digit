@@ -9,12 +9,12 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
-@Getter
-@Setter
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 @Table(schema = "public", name = "user")
 public class User extends BaseEntity {
 

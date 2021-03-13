@@ -23,7 +23,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class UserServiceTest {
+class UserServiceTest {
 
     @Mock
     private UserRepository repository;
@@ -35,7 +35,7 @@ public class UserServiceTest {
     private UserService userService;
 
     @Test
-    public void shouldCreateNewUser_whenEmailIsValid() {
+    void shouldCreateNewUser_whenEmailIsValid() {
         var userMock = new User("rodrick", "rodrik@email.com", Collections.emptyList());
         when(repository.findByEmailAndRemovedAtIsNull(anyString())).thenReturn(Optional.empty());
 
@@ -51,7 +51,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void shouldTryCreateNewUserButThrowsApplicationException_whenEmailIsAlreadyRegistered() {
+    void shouldTryCreateNewUserButThrowsApplicationException_whenEmailIsAlreadyRegistered() {
         var userMock = new User("rodrick", "rodrik@email.com", Collections.emptyList());
         when(repository.findByEmailAndRemovedAtIsNull(anyString())).thenReturn(Optional.of(userMock));
 
@@ -61,7 +61,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void shouldUpdateUser_whenUserAlreadyExist() {
+    void shouldUpdateUser_whenUserAlreadyExist() {
         var userMock = new User("rodrick", "rodrik@email.com", Collections.emptyList());
         when(repository.findByUidAndRemovedAtIsNull(any())).thenReturn(Optional.of(userMock));
 
@@ -77,7 +77,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void shouldCreateUser_whenTryingUpdateAUserThatDoNotExist() {
+    void shouldCreateUser_whenTryingUpdateAUserThatDoNotExist() {
         var userUidMock = UUID.randomUUID();
         User userMock = getMockedUser(userUidMock);
         when(repository.findByUidAndRemovedAtIsNull(any())).thenReturn(Optional.empty());
@@ -94,7 +94,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void shouldReturnUser_whenUserUuidIsAlreadyRegistered() {
+    void shouldReturnUser_whenUserUuidIsAlreadyRegistered() {
         var userUidMock = UUID.randomUUID();
         User userMock = getMockedUser(userUidMock);
         when(repository.findByUidAndRemovedAtIsNull(userUidMock)).thenReturn(Optional.of(userMock));
@@ -105,7 +105,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void shouldThrowApplicationException_whenUserNotFoundedByUuid() {
+    void shouldThrowApplicationException_whenUserNotFoundedByUuid() {
         var userUidMock = UUID.randomUUID();
         when(repository.findByUidAndRemovedAtIsNull(userUidMock)).thenReturn(Optional.empty());
         assertThrows(ApplicationException.class, () ->
@@ -113,7 +113,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void shouldReturnUserSingleDigits_whenFetchingASpecificUser() {
+    void shouldReturnUserSingleDigits_whenFetchingASpecificUser() {
         var singleDigitsMock = List.of(mock(SingleDigit.class));
         var userUidMock = UUID.randomUUID();
         User userMock = getMockedUser(userUidMock);
@@ -125,7 +125,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void shouldReturnAllUsers_whenExistsRegisteredUsers() {
+    void shouldReturnAllUsers_whenExistsRegisteredUsers() {
         var userMock = mock(User.class);
         var userListMock = List.of(userMock);
         when(repository.findAllByRemovedAtIsNull()).thenReturn(userListMock);
@@ -135,14 +135,14 @@ public class UserServiceTest {
     }
 
     @Test
-    public void shouldReturnNoUsers_whenDoNotExistsRegisteredUsers() {
+    void shouldReturnNoUsers_whenDoNotExistsRegisteredUsers() {
         when(repository.findAllByRemovedAtIsNull()).thenReturn(Collections.emptyList());
         var result = userService.findAll();
         assertEquals(Collections.emptyList(), result);
     }
 
     @Test
-    public void shouldDeleteUser_whenUserIsFoundedByUuid() {
+    void shouldDeleteUser_whenUserIsFoundedByUuid() {
         var userUidMock = UUID.randomUUID();
         var userMock = User.builder()
                 .name("rodrick")
@@ -158,7 +158,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void shouldThrowApplicationException_whenTryingToDeleteANonexistentUser() {
+    void shouldThrowApplicationException_whenTryingToDeleteANonexistentUser() {
         var userUidMock = UUID.randomUUID();
         when(repository.findByUidAndRemovedAtIsNull(any())).thenReturn(Optional.empty());
         assertThrows(ApplicationException.class, () ->
