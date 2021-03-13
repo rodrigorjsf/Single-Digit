@@ -25,7 +25,7 @@ Este projeto usa as seguintes tecnologias:
 - [Mockito](https://site.mockito.org/)
 - [H2 Database](https://www.h2database.com/html/main.html)
 
-## 1- Ferramentas e Configurações
+## 1 - Ferramentas e Configurações
 
 ### 1.1- IntelliJ
 
@@ -62,7 +62,7 @@ Incluir `Run Configurations`:
 
 Obs.: Antes de iniciar a implementação no projeto, execute a **_Maven Build_** (item 1) para baixar todas as dependências do projeto para seu repositório local do Maven (normalmente na pasta `~/.m2`) e deste forma evitar erros de compilação/_runtime_.
 
-## 2- Arquitetura do Sistema
+## 2 - Arquitetura do Sistema
 
 Este projeto segue um padrão arquitetural em camadas [[1](https://www.oreilly.com/library/view/software-architecture-patterns/9781491971437/ch01.html),[2](https://en.wikipedia.org/wiki/Multitier_architecture)] para fornecer uma API REST [[3](https://dzone.com/articles/intro-rest),[4](https://www.quora.com/What-are-RESTful-APIs-and-how-do-they-work),[5](https://blog.caelum.com.br/rest-principios-e-boas-praticas/)]. A camada mais externa do sistema (_Controller_) implementa os serviços REST (JAX-RS), tendo esta camada a responsabilidade de validar os dados de entrada, assim como realizar as restrições de segurança necessárias (autenticação/autorização) no acesso aos serviços disponibilizados.
 
@@ -113,5 +113,64 @@ src
 │   │   └── application                              -> arquivo de propriedades para ambiente de homologacao do projeto
 ├── test
 │   ├── java/com/challange/singledigit
-│   │   ├── service                                  -> classes de teste da camada de negócio (xxxxService.java)
+└── └── └── service                                  -> classes de teste da camada de negócio (xxxxService.java)
 ```
+
+## 3 - Testes
+###Testes Unitários
+Foram criados testes unitários para as classes de negócio (*Service.java) dos serviços, a fim de garantir a corretude acerca da lógica de negócio envolvendo estas classes. Estas classes de testes foram criadas usando JUnit e Mockito (para 'mockar' as classes dependentes). Para rodar todos os testes unitários do projeto usando o Maven, executar o seguinte comando:
+```
+$ mvn clean test
+```
+## 4 - Geração da Build e Deploy da Aplicação
+O deploy da aplicação foi feito no servidor do [Heroku](https://www.heroku.com/) onde foi necessário
+realizar o download do [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) para subir a aplicação no servidor.
+
+###4.1 - Deploy da Aplicação
+Após instalar o Heroku CLI é necessário realizar os seguintes passos:
+
+Abrir o CMD e ir ao diretório do projeto
+````
+cd /d D:\Documentos\Single-Digit
+````
+Logo após é necessário realizar o login no heroku
+````
+$ heroku login
+````
+Use o Git para clonar o código-fonte do projeto single-digit para sua máquina local.
+````
+$ heroku git:clone -a single-digit-project
+$ cd single-digit-project
+````
+Em caso de alteração no código ou necessidade de deploy, relizar os seguintes comandos
+````
+$ git add .
+$ git commit -am "your commit description"
+$ git push heroku main
+````
+### 4.1- Gerar a Build do Aplicação
+````
+$ mvn clean package
+````
+## 5- Sobre o calculo do dígito único
+A forma como o calculo do dígito único é feito utiliza de duas estratégias:
+
+A primeira delas diz respeito a números que tem como máximo valor a variável Long.MAX_VALUE (9.223.372.036.854.775.807) utilizando um algoritmo de complexidade O(1) para realizar o cálculo.
+Esse algoritmo consiste no seguinte conceito "A soma dos dígitos até o dígito único em Java também pode ser calculada dividindo diretamente o número por 9. Se o número for divisível por 9, então é a soma dos dígitos até que o dígito único seja 9, caso contrário, é o número% 9".
+````
+public long singleDigit(long number) {
+     return number % 9 ;
+}
+````
+A segunda estratégia é usada para números que tem valor maior que a variável Long.MAX_VALUE utilizando um algoritmo de complexidade O(n) com Stream API para realizar o cálculo.
+````
+public long digitalSum(String number) {
+     while (number.length() > 1) {
+            number = Integer.toString(
+                                number.chars()
+                                      .map(Character::getNumericValue)
+                                      .sum());
+        }
+        return Integer.parseInt(number);
+}
+````

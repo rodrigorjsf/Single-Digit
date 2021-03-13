@@ -3,6 +3,7 @@ package com.challange.singledigit.service;
 import com.challange.singledigit.exception.ApplicationException;
 import com.challange.singledigit.model.User;
 import com.challange.singledigit.util.RSAUtil;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -13,8 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import javax.crypto.IllegalBlockSizeException;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -43,6 +43,8 @@ public class CryptoServiceTest {
         verify(userService).update(singleDigitCaptor.capture());
         var result = singleDigitCaptor.getValue();
 
+        assertTrue(Base64.isBase64(result.getEmail()));
+        assertTrue(Base64.isBase64(result.getName()));
         assertEquals("rodrick", RSAUtil.decrypt(result.getName(), PRIVATE_KEY));
         assertEquals("rodrik@email.com", RSAUtil.decrypt(result.getEmail(), PRIVATE_KEY));
     }
