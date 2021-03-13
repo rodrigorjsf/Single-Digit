@@ -2,7 +2,7 @@
 
 Projeto de API criada para cadastramento de usuário e identificação do dígito único a partir da soma dos dígitos de um número.
 
-Especificação da API:(http://localhost:8083/api/swagger-ui.html)
+Especificação da API:(https://single-digit-project.herokuapp.com/api/v1/swagger-ui.html#/)
 
 ```
             :: SINGLE DIGIT APPLICATION ::
