@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.challange</groupId>
     <artifactId>singledigit</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <name>singledigit</name>
     <description>Project to calculate single digit</description>
     <properties>
