@@ -45,9 +45,9 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(new UserResponse(user));
     }
 
-    @ApiOperation(value = "Create a new user")
+    @ApiOperation(value = "Update a user")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Returns a new created user."),
+            @ApiResponse(code = 200, message = "Returns a updated user."),
             @ApiResponse(code = 400, message = "Missing/Wrong parameters"),
     })
     @ResponseStatus(HttpStatus.OK)
