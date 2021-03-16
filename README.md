@@ -88,7 +88,7 @@ A última camada (_Repository_) do modelo é responsável pelas funcionalidades 
      └────────┘
 ```
 
-O projeto foi desenvolvido usando a ferramenta [SpringBoot](https://thorntail.io/), que possibilita o empacotamento do servidor de aplicação (Tom Cat) juntamente com a build do sistema em um único arquivo `.jar`. Para isto, basta rodar o seguinte comando com o Maven:
+O projeto foi desenvolvido usando a ferramenta [SpringBoot](https://spring.io/projects/spring-boot), que possibilita o empacotamento do servidor de aplicação (Tom Cat) juntamente com a build do sistema em um único arquivo `.jar`. Para isto, basta rodar o seguinte comando com o Maven:
 
 ```sh
 $ mvn install
